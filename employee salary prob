@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+struct DEPT {
+    string Name;
+    int  emp_id;
+    int years_of_experience;
+    int Basic_salary;
+    
+};
+int main(){
+    int n;
+    cin >> n;
+    DEPT employees[n];
+    for (int i = 0; i<n; i++){
+        cin >> employees[i].Name >> employees[i].emp_id >> employees[i].years_of_experience >> employees[i].Basic_salary;
+        if (employees[i].years_of_experience >= 10) {
+            employees[i].Basic_salary *= 1.10;
+            
+        }
+        else if (employees[i].years_of_experience >= 5){
+            employees[i].Basic_salary *= 1.05;
+            
+        }
+        else if (employees[i].years_of_experience >= 1) {
+            employees[i].Basic_salary *= 1.02;
+            
+        }
+    }
+    for (int i=0;i<n;i++){
+        cout << "Employee Name: " << employees[i].Name << " ";
+        cout << "Employee Id: " << employees[i].emp_id << " ";
+        cout << "years of experience: " << employees[i].years_of_experience << " ";
+        cout << "salary: "<< employees[i].Basic_salary << " ";
+    }
+    return 0;
+}
