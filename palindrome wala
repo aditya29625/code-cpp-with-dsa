@@ -1,0 +1,69 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+class Node {
+public:
+    char data;
+    Node* next;
+
+    Node(char val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+// Function to insert a node at the end of a linked list
+void insertNode(Node*& head, char val) {
+    Node* newNode = new Node(val);
+    if (head == nullptr) {
+        head = newNode;
+        return;
+    }
+
+    Node* temp = head;
+    while (temp->next != nullptr) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+
+// Function to check if a linked list is a palindrome
+bool isPalindrome(Node* head) {
+    stack<char> charStack;
+    Node* temp = head;
+
+    while (temp != nullptr) {
+        charStack.push(temp->data);
+        temp = temp->next;
+    }
+
+    temp = head;
+    while (!charStack.empty()) {
+        if (charStack.top() != temp->data) {
+            return false;
+        }
+        charStack.pop();
+        temp = temp->next;
+    }
+
+    return true;
+}
+
+int main() {
+    Node* head = nullptr;
+    char input;
+
+    cout << "Enter characters separated by spaces ($ to stop): ";
+    while (cin >> input && input != '$') {
+        insertNode(head, input);
+    }
+
+    if (isPalindrome(head)) {
+        cout << "The linked list is a palindrome" << endl;
+    } else {
+        cout << "The linked list is not a palindrome" << endl;
+    }
+
+    return 0;
+}
